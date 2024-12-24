@@ -1,12 +1,9 @@
 import { cn } from "@/lib/utils";
 import "@/styles/globals.css";
-import { Geist_Mono } from "next/font/google";
+import { GeistMono } from "geist/font/mono";
 import { type Metadata } from "next";
 
-const geistMono = Geist_Mono({
-  subsets: ["latin"],
-  variable: "--geist-mono",
-});
+const geistMono = GeistMono;
 
 export const metadata: Metadata = {
   title: "git-christmas",
