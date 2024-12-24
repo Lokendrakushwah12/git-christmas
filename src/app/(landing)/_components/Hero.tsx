@@ -10,8 +10,8 @@ import Link from "next/link";
 
 const Hero = () => {
   return (
-    <section className="h-full py-4">
-      <div className="scroll relative z-0 flex h-full flex-col items-center justify-start overflow-y-auto rounded-3xl border border-[#ECECEC] bg-[#ECECEC] text-center text-foreground">
+    <section className="z-10 h-full w-full overflow-hidden px-4 py-4 md:w-fit">
+      <div className="scroll relative z-0 flex h-full flex-col items-center justify-start overflow-y-auto overflow-x-hidden rounded-3xl border border-[#ECECEC] bg-[#ECECEC] text-center text-foreground">
         <Top />
         <div className="mt-24">
           <MerryChris />

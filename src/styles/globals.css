@@ -89,6 +89,12 @@ html {
   letter-spacing: -0.5px;
 }
 
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
 ::selection {
   background: hsl(var(--secondary-foreground) / 0.1);
 }
