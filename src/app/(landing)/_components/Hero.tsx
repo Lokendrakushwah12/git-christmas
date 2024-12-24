@@ -14,7 +14,7 @@ import Link from "next/link";
 
 // Function to fetch user data
 export const getServerSideProps = async (context: any) => {
-  const username = "Lokendrakushwah12";
+  const username = context.query.username ?? "Lokendrakushwah12";
   const { userData, error } = await fetchGitHubUser(username);
   const totalCommits = error ? null : await getTotalCommits(username);
 
