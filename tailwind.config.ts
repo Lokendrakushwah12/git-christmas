@@ -7,7 +7,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["var(--geist-mono)", ...fontFamily.sans],
+        sans: ["var(--font-geist-mono)", ...fontFamily.sans],
       },
       borderRadius: {
         lg: "var(--radius)",

@@ -1,9 +1,7 @@
 import { cn } from "@/lib/utils";
 import "@/styles/globals.css";
-import { GeistMono } from "geist/font/mono";
+import {GeistMono} from "geist/font/mono"
 import { type Metadata } from "next";
-
-const geistMono = GeistMono;
 
 export const metadata: Metadata = {
   title: "git-christmas",
@@ -17,13 +15,13 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistMono.variable}`}
+      className={`${GeistMono.variable}`}
       suppressHydrationWarning
     >
       <body
         className={cn(
           "bg-background font-sans antialiased",
-          geistMono.variable,
+          GeistMono.variable,
         )}
       >
         {children}

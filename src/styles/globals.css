@@ -103,3 +103,10 @@ body {
   scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
   scrollbar-width: thin;
 }
+
+input:-webkit-autofill {
+  background-color: transparent !important;
+  color: inherit !important;
+  transition: background 5000s ease-in-out 0s;
+  -webkit-text-fill-color: inherit !important;
+}
