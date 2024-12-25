@@ -12,7 +12,7 @@ import { toPng } from "html-to-image";
 import Link from "next/link";
 import { useRef, useState } from "react";
 import ProfileDetails from "./ProfileDetails";
-import { fetchGitHubUser } from "@/app/api/fetchGitHubUser";
+import { fetchGitHubUser } from "../../api/fetchGitHubUser";
 
 const Hero = () => {
   const [userName, setUserName] = useState("");
