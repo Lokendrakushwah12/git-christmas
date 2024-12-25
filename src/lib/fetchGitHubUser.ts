@@ -101,7 +101,7 @@ export const fetchGitHubUser = async (username: string) => {
 
     // LONGEST STREAK
     const commitDates: string[] = [];
-    commitDates.sort();
+    commitDates.sort((a, b) => new Date(a).getTime() - new Date(b).getTime());
 
     let longestStreak = 0;
     let currentStreak = 1;
@@ -113,7 +113,6 @@ export const fetchGitHubUser = async (username: string) => {
       if (currentCommitDate && previousCommitDate) {
         const currentDate = new Date(currentCommitDate);
         const previousDate = new Date(previousCommitDate);
-
         if (
           (currentDate.getTime() - previousDate.getTime()) /
             (1000 * 3600 * 24) ===
@@ -126,7 +125,6 @@ export const fetchGitHubUser = async (username: string) => {
         }
       }
     }
-
     longestStreak = Math.max(longestStreak, currentStreak);
 
     // PRs MERGED

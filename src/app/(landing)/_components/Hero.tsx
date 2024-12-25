@@ -107,13 +107,13 @@ const Hero = () => {
           <div className="size-full">
             <form
               onSubmit={handleSubmit}
-              className="flex flex-col items-center gap-2"
+              className="flex flex-col items-center gap-2 px-4 md:px-24"
             >
               <Input
                 type="text"
                 name="username"
                 placeholder="Enter GitHub username"
-                className="w-xl w-full rounded-lg border border-neutral-300 bg-white p-2 text-sm"
+                className="w-full max-w-2xl rounded-lg border border-neutral-300 bg-white p-2 text-sm"
                 value={userName}
                 onChange={(e) => setUserName(e.target.value)}
               />
@@ -128,9 +128,10 @@ const Hero = () => {
           </div>
         ) : (
           <div>
-            {" "}
             {loading ? (
-              <Loader />
+              <div className="absolute inset-0 z-20 flex items-center justify-center bg-gray-800 bg-opacity-50">
+                <Loader />
+              </div>
             ) : (
               <ProfileDetails
                 name={profileData.name}
