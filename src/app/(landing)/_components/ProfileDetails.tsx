@@ -31,7 +31,7 @@ const ProfileDetails = ({
   error,
 }: ProfileDetailsProps) => {
   return (
-    <>
+    <div className="relative flex flex-col items-center">
       {!error ? (
         <>
           <div className="pointer-events-none -mt-8">
@@ -60,13 +60,13 @@ const ProfileDetails = ({
               className="rounded-full border-2 border-[#FF1639]"
             />
           </div>
-          <p className="max-w-xl text-balance text-base text-foreground sm:text-xl md:text-wrap">
+          <p className="max-w-xl text-balance text-base font-bold text-foreground sm:text-xl md:text-wrap">
             {name}
           </p>
           <p className="max-w-xl text-balance text-sm text-muted-foreground md:text-wrap">
             {bio}
           </p>
-          <div className="absolute mt-10 flex size-full items-center justify-center gap-4">
+          <div className="absolute -mt-[23%] flex size-full items-center justify-center gap-4 pb-5">
             <div className="absolute left-2 flex flex-col space-y-6 md:left-[15%]">
               {/* 1 */}
               <div className="flex -rotate-3 flex-col items-center justify-center">
@@ -126,7 +126,7 @@ const ProfileDetails = ({
       ) : (
         <p className="text-red-500">{error}</p>
       )}
-    </>
+    </div>
   );
 };
 
