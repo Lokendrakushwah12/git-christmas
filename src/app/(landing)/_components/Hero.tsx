@@ -10,18 +10,11 @@ import { Input } from "@/components/ui/input";
 import { saveAs } from "file-saver";
 import { toPng } from "html-to-image";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
-import ProfileDetails from "./ProfileDetails";
+import { useRef, useState } from "react";
 import { fetchGitHubUser } from "../../api/fetchGitHubUser";
+import ProfileDetails from "./ProfileDetails";
 
 const Hero = () => {
-  const [isClient, setIsClient] = useState(false);
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-  if (!isClient) {
-    return <Loader/>;
-  }
   const [userName, setUserName] = useState("");
   const [showProfile, setShowProfile] = useState(false);
   const [profileData, setProfileData] = useState<{
@@ -95,15 +88,13 @@ const Hero = () => {
   };
 
   const handleShare = () => {
-    if (typeof window !== "undefined") {
-      const twitterUrl = `https://x.com/compose/post?text=Check%20out%20my%20cool%20Christmas%20GitHub%20profile!%20%0ALink:%20https://git-christmas.vercel.app/`;
-      window.open(twitterUrl, "_blank");
-    }
+    const twitterUrl = `https://x.com/compose/post?text=Check%20out%20my%20cool%20Christmas%20GitHub%20profile!%20%0ALink:%20https://git-christmas.vercel.app/`;
+    window.open(twitterUrl, "_blank");
   };
 
   return (
     <section className="z-10 h-full w-full overflow-hidden px-4 py-4 md:w-fit">
-      {/* <div
+      <div
         ref={profileRef}
         className="scroll relative z-0 flex h-full min-h-screen flex-col items-center justify-start overflow-hidden rounded-3xl border-2 border-[#ECECEC] bg-[#ECECEC] text-center text-foreground md:min-w-[600px]"
       >
@@ -207,7 +198,7 @@ const Hero = () => {
             Built by <span className="hover:underline">Lokendra.</span>
           </div>
         </Link>
-      </div> */}
+      </div>
     </section>
   );
 };

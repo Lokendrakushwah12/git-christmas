@@ -27,7 +27,7 @@ const Loader = () => {
   };
 
   return (
-    <div className="flex items-center justify-center">
+    <div className="flex pointer-events-none items-center justify-center">
       <Lottie options={defaultOptions} height={100} width={100} />
     </div>
   );
