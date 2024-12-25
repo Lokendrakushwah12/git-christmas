@@ -103,7 +103,7 @@ const Hero = () => {
 
   return (
     <section className="z-10 h-full w-full overflow-hidden px-4 py-4 md:w-fit">
-      {/* <div
+      <div
         ref={profileRef}
         className="scroll relative z-0 flex h-full min-h-screen flex-col items-center justify-start overflow-hidden rounded-3xl border-2 border-[#ECECEC] bg-[#ECECEC] text-center text-foreground md:min-w-[600px]"
       >
@@ -158,15 +158,14 @@ const Hero = () => {
             )}
           </div>
         )}
-
         <div className="absolute -bottom-[0%] left-0 -z-10 opacity-30 md:opacity-100">
           <LeftBottom />
         </div>
         <div className="absolute -bottom-[0%] right-0 -z-10 opacity-30 md:opacity-100">
           <RightBottom />
         </div>
-      </div> */}
-      {showProfile && (
+      </div>
+      {/* {showProfile && (
         <div className="mt-8 flex flex-row items-center justify-center gap-2 rounded-xl border-2 border-black/20 bg-black/70 px-4 py-2 backdrop-blur-[12px]">
           <span
             className="cursor-pointer text-nowrap text-white/80 hover:underline"
@@ -184,7 +183,7 @@ const Hero = () => {
             Share on X
           </span>
         </div>
-      )}
+      )} */}
       <div className="mt-8 flex flex-col items-center justify-center gap-2 rounded-xl border-2 border-black/20 bg-black/70 py-2 backdrop-blur-[12px]">
         <Link
           target="_blank"
