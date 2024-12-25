@@ -10,11 +10,18 @@ import { Input } from "@/components/ui/input";
 import { saveAs } from "file-saver";
 import { toPng } from "html-to-image";
 import Link from "next/link";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ProfileDetails from "./ProfileDetails";
 import { fetchGitHubUser } from "../../api/fetchGitHubUser";
 
 const Hero = () => {
+  const [isClient, setIsClient] = useState(false);
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+  if (!isClient) {
+    return <Loader />;
+  }
   const [userName, setUserName] = useState("");
   const [showProfile, setShowProfile] = useState(false);
   const [profileData, setProfileData] = useState<{
@@ -97,7 +104,7 @@ const Hero = () => {
   return (
     <section className="z-10 h-full w-full overflow-hidden px-4 py-4 md:w-fit">
       <div
-        // ref={profileRef}
+        ref={profileRef}
         className="scroll relative z-0 flex h-full min-h-screen flex-col items-center justify-start overflow-hidden rounded-3xl border-2 border-[#ECECEC] bg-[#ECECEC] text-center text-foreground md:min-w-[600px]"
       >
         <Top />
@@ -105,7 +112,7 @@ const Hero = () => {
           <MerryChris />
         </div>
 
-        {loading &&  <Loader />}
+        {loading && <Loader />}
         {!showProfile && !loading && (
           <div className="size-full">
             <form
