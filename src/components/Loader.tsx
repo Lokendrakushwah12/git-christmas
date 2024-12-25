@@ -1,34 +1,51 @@
-import Lottie from "react-lottie";
+import dynamic from "next/dynamic";
+import React, { useEffect, useState } from "react";
+
 import animationData from "./assets/elk.json";
 
+const Lottie = dynamic(() => import("react-lottie"), { ssr: false });
+
 const Loader = () => {
-  const defaultOptions = {
-    loop: true,
-    autoplay: true,
-    animationData: {
-      ...animationData,
-      layers: animationData.layers.map((layer) => {
-        if (layer.ef) {
-          layer.ef.forEach((effect) => {
-            if (effect.mn === "ADBE Color Control" && effect.ef?.[0]) {
-              effect.ef[0].v.k = [0, 0, 0, 0.6];
-            }
-            if (effect.mn === "ADBE Slider Control" && effect.ef?.[0]) {
-              effect.ef[0].v.k = 12;
+  const [modifiedAnimationData, setModifiedAnimationData] =
+    useState(animationData);
+
+  useEffect(() => {
+    const updatedAnimationData = JSON.parse(JSON.stringify(animationData));
+
+    if (updatedAnimationData && updatedAnimationData.layers) {
+      updatedAnimationData.layers.forEach((layer: any) => {
+        if (layer.shapes) {
+          layer.shapes.forEach((shape: any) => {
+            if (shape.it) {
+              shape.it.forEach((item: any) => {
+                if (item.ty === "st") {
+                  item.c.k = [1, 1, 1, 0.6];
+                  item.w.k = 10;
+                }
+              });
             }
           });
         }
-        return layer;
-      }),
-    },
+      });
+    }
+
+    setModifiedAnimationData(updatedAnimationData);
+  }, []);
+
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: modifiedAnimationData,
     rendererSettings: {
       preserveAspectRatio: "xMidYMid slice",
     },
   };
 
   return (
-    <div className="flex pointer-events-none items-center justify-center">
-      <Lottie options={defaultOptions} height={100} width={100} />
+    <div className="pointer-events-none flex items-center justify-center">
+      {modifiedAnimationData && (
+        <Lottie options={defaultOptions} height={100} width={100} />
+      )}
     </div>
   );
 };
