@@ -96,7 +96,7 @@ const Hero = () => {
 
   return (
     <section className="z-10 h-full w-full overflow-hidden px-4 py-4 md:w-fit">
-      {/* <div
+      <div
         ref={profileRef}
         className="scroll relative z-0 flex h-full min-h-screen flex-col items-center justify-start overflow-hidden rounded-3xl border-2 border-[#ECECEC] bg-[#ECECEC] text-center text-foreground md:min-w-[600px]"
       >
@@ -108,7 +108,7 @@ const Hero = () => {
         {loading &&  <Loader />}
         {!showProfile && !loading && (
           <div className="size-full">
-            <form
+            {/* <form
               onSubmit={handleSubmit}
               className="flex flex-col items-center gap-2 px-4 md:px-24"
             >
@@ -127,7 +127,7 @@ const Hero = () => {
                 Show My Profile
               </button>
             </form>
-            {error && <p className="mt-2 text-red-500">{error}</p>}
+            {error && <p className="mt-2 text-red-500">{error}</p>} */}
           </div>
         )}
         {showProfile && (
@@ -201,7 +201,7 @@ const Hero = () => {
             Built by <span className="hover:underline">Lokendra.</span>
           </div>
         </Link>
-      </div> */}
+      </div>
     </section>
   );
 };
