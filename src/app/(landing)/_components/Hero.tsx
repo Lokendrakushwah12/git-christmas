@@ -130,7 +130,7 @@ const Hero = () => {
             {error && <p className="mt-2 text-red-500">{error}</p>}
           </div>
         )}
-        {/* {showProfile && (
+        {showProfile && (
           <div>
             {loading ? (
               <div className="absolute inset-0 z-20 flex items-center justify-center bg-gray-800 bg-opacity-50">
@@ -150,7 +150,7 @@ const Hero = () => {
               />
             )}
           </div>
-        )} */}
+        )}
 
         <div className="absolute -bottom-[0%] left-0 -z-10 opacity-30 md:opacity-100">
           <LeftBottom />
@@ -159,7 +159,7 @@ const Hero = () => {
           <RightBottom />
         </div>
       </div>
-      {showProfile && (
+      {/* {showProfile && (
         <div className="mt-8 flex flex-row items-center justify-center gap-2 rounded-xl border-2 border-black/20 bg-black/70 px-4 py-2 backdrop-blur-[12px]">
           <span
             className="cursor-pointer text-nowrap text-white/80 hover:underline"
@@ -177,7 +177,7 @@ const Hero = () => {
             Share on X
           </span>
         </div>
-      )}
+      )} */}
       <div className="mt-8 flex flex-col items-center justify-center gap-2 rounded-xl border-2 border-black/20 bg-black/70 py-2 backdrop-blur-[12px]">
         <Link
           target="_blank"
