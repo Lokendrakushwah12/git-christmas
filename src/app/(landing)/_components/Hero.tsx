@@ -103,7 +103,8 @@ const Hero = () => {
           <MerryChris />
         </div>
 
-        {!showProfile ? (
+        {loading && <Loader />}
+        {!showProfile && !loading && (
           <div className="size-full">
             <form
               onSubmit={handleSubmit}
@@ -126,7 +127,8 @@ const Hero = () => {
             </form>
             {error && <p className="mt-2 text-red-500">{error}</p>}
           </div>
-        ) : (
+        )}
+        {showProfile && (
           <div>
             {loading ? (
               <div className="absolute inset-0 z-20 flex items-center justify-center bg-gray-800 bg-opacity-50">
