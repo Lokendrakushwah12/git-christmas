@@ -48,39 +48,39 @@ const Hero = () => {
   const profileRef = useRef<HTMLDivElement>(null);
 
   const handleSubmit = async (event: React.FormEvent) => {
-    // event.preventDefault();
-    // setError(null);
-    // setLoading(true);
+    event.preventDefault();
+    setError(null);
+    setLoading(true);
 
-    // const result = await fetchGitHubUser(userName);
+    const result = await fetchGitHubUser(userName);
 
-    // if (result === null || result.error) {
-    //   setError(result?.error || "An unexpected error occurred.");
-    //   setShowProfile(false);
-    //   setLoading(false);
-    //   return;
-    // }
+    if (result === null || result.error) {
+      setError(result?.error || "An unexpected error occurred.");
+      setShowProfile(false);
+      setLoading(false);
+      return;
+    }
 
-    // const { userData, stats } = result;
+    const { userData, stats } = result;
 
-    // if (userData && stats) {
-    //   setProfileData({
-    //     name: userData?.name || "No name available",
-    //     src: userData?.avatar_url || "",
-    //     bio: userData?.bio || "No bio available",
-    //     totalStars: stats.totalStars || 0,
-    //     totalRepos: stats.totalRepos || 0,
-    //     longestStreak: stats.longestStreak || 0,
-    //     prsMerged: stats.totalMergedPRs || 0,
-    //     totalCommits: stats.totalCommits || 0,
-    //   });
+    if (userData && stats) {
+      setProfileData({
+        name: userData?.name || "No name available",
+        src: userData?.avatar_url || "",
+        bio: userData?.bio || "No bio available",
+        totalStars: stats.totalStars || 0,
+        totalRepos: stats.totalRepos || 0,
+        longestStreak: stats.longestStreak || 0,
+        prsMerged: stats.totalMergedPRs || 0,
+        totalCommits: stats.totalCommits || 0,
+      });
 
-    //   setShowProfile(true);
-    // } else {
-    //   setError("Failed to fetch valid user data.");
-    //   setShowProfile(false);
-    // }
-    // setLoading(false);
+      setShowProfile(true);
+    } else {
+      setError("Failed to fetch valid user data.");
+      setShowProfile(false);
+    }
+    setLoading(false);
   };
 
   const handleDownload = async () => {
@@ -103,7 +103,7 @@ const Hero = () => {
 
   return (
     <section className="z-10 h-full w-full overflow-hidden px-4 py-4 md:w-fit">
-      <div
+      {/* <div
         ref={profileRef}
         className="scroll relative z-0 flex h-full min-h-screen flex-col items-center justify-start overflow-hidden rounded-3xl border-2 border-[#ECECEC] bg-[#ECECEC] text-center text-foreground md:min-w-[600px]"
       >
@@ -165,7 +165,7 @@ const Hero = () => {
         <div className="absolute -bottom-[0%] right-0 -z-10 opacity-30 md:opacity-100">
           <RightBottom />
         </div>
-      </div>
+      </div> */}
       {showProfile && (
         <div className="mt-8 flex flex-row items-center justify-center gap-2 rounded-xl border-2 border-black/20 bg-black/70 px-4 py-2 backdrop-blur-[12px]">
           <span
