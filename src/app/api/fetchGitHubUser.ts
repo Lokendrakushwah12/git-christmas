@@ -1,3 +1,4 @@
+import { longestStreakFn } from "./longestStreakFn";
 import { searchPullRequests } from "./searchPullRequests";
 
 type GitHubStats = {
@@ -81,9 +82,9 @@ export const fetchGitHubUser = async (username: string) => {
     // TOTAL COMMITS
     const reposData = await reposResponse.json();
 
-    const oneYearAgo = new Date();
-    oneYearAgo.setDate(oneYearAgo.getDate() - 365);
-    const dateFilter = oneYearAgo.toISOString().split("T")[0];
+    const oneYeay = new Date();
+    oneYeay.setDate(oneYeay.getDate() - 365);
+    const dateFilter = oneYeay.toISOString().split("T")[0];
 
     const commitsResponse = await fetch(
       `https://api.github.com/search/commits?q=author:${username}+committer-date:>=${dateFilter}`,
@@ -100,32 +101,7 @@ export const fetchGitHubUser = async (username: string) => {
     const totalCommits = commitsData.total_count;
 
     // LONGEST STREAK
-    const commitDates: string[] = [];
-    commitDates.sort((a, b) => new Date(a).getTime() - new Date(b).getTime());
-
-    let longestStreak = 0;
-    let currentStreak = 1;
-
-    for (let i = 1; i < commitDates.length; i++) {
-      const currentCommitDate = commitDates[i];
-      const previousCommitDate = commitDates[i - 1];
-
-      if (currentCommitDate && previousCommitDate) {
-        const currentDate = new Date(currentCommitDate);
-        const previousDate = new Date(previousCommitDate);
-        if (
-          (currentDate.getTime() - previousDate.getTime()) /
-            (1000 * 3600 * 24) ===
-          1
-        ) {
-          currentStreak++;
-        } else {
-          longestStreak = Math.max(longestStreak, currentStreak);
-          currentStreak = 1;
-        }
-      }
-    }
-    longestStreak = Math.max(longestStreak, currentStreak);
+    let longestStreak = await longestStreakFn(reposData);
 
     // PRs MERGED
     const totalMergedPRs = await searchPullRequests(username);
