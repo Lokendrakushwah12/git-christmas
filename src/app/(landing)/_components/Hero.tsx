@@ -105,7 +105,10 @@ const Hero = () => {
           <MerryChris />
         </div>
 
-        {loading && <Loader />}
+        {
+          loading && "Loading..."
+          // <Loader />
+        }
         {!showProfile && !loading && (
           <div className="size-full">
             <form
