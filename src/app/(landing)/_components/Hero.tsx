@@ -88,8 +88,10 @@ const Hero = () => {
   };
 
   const handleShare = () => {
-    const twitterUrl = `https://x.com/compose/post?text=Check%20out%20my%20cool%20Christmas%20GitHub%20profile!%20%0ALink:%20https://git-christmas.vercel.app/`;
-    window.open(twitterUrl, "_blank");
+    if (typeof window !== "undefined") {
+      const twitterUrl = `https://x.com/compose/post?text=Check%20out%20my%20cool%20Christmas%20GitHub%20profile!%20%0ALink:%20https://git-christmas.vercel.app/`;
+      window.open(twitterUrl, "_blank");
+    }
   };
 
   return (
