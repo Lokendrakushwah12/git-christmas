@@ -5,14 +5,14 @@ import MerryChris from "@/components/assets/MerryChris";
 import RightBottom from "@/components/assets/RightBottom";
 import Top from "@/components/assets/Top";
 import Twitter from "@/components/assets/Twitter";
+import Loader from "@/components/Loader";
 import { Input } from "@/components/ui/input";
-import { fetchGitHubUser } from "@/app/api/fetchGitHubUser";
+import { saveAs } from "file-saver";
+import { toPng } from "html-to-image";
 import Link from "next/link";
 import { useRef, useState } from "react";
 import ProfileDetails from "./ProfileDetails";
-import Loader from "@/components/Loader";
-import { toPng } from "html-to-image";
-import { saveAs } from "file-saver";
+import { fetchGitHubUser } from "@/app/api/fetchGitHubUser";
 
 const Hero = () => {
   const [userName, setUserName] = useState("");
