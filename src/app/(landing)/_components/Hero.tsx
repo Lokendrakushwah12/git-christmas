@@ -6,7 +6,7 @@ import RightBottom from "@/components/assets/RightBottom";
 import Top from "@/components/assets/Top";
 import Twitter from "@/components/assets/Twitter";
 import { Input } from "@/components/ui/input";
-import { fetchGitHubUser } from "@/lib/fetchGitHubUser";
+import { fetchGitHubUser } from "@/app/api/fetchGitHubUser";
 import Link from "next/link";
 import { useRef, useState } from "react";
 import ProfileDetails from "./ProfileDetails";
