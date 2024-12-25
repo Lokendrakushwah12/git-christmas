@@ -1,25 +1,39 @@
-import dynamic from "next/dynamic";
-import { useEffect, useState, useRef } from "react";
+"use client";
+import Leaf from "@/components/assets/Leaf";
+import LeftBottom from "@/components/assets/LeftBottom";
+import MerryChris from "@/components/assets/MerryChris";
+import RightBottom from "@/components/assets/RightBottom";
+import Top from "@/components/assets/Top";
+import Twitter from "@/components/assets/Twitter";
+import Loader from "@/components/Loader";
+import { Input } from "@/components/ui/input";
 import { saveAs } from "file-saver";
 import { toPng } from "html-to-image";
-import { fetchGitHubUser } from "../../api/fetchGitHubUser";
-import { Input } from "@/components/ui/input";
-import Loader from "@/components/Loader";
 import Link from "next/link";
-
-const Leaf = dynamic(() => import("@/components/assets/Leaf"), { ssr: false });
-const LeftBottom = dynamic(() => import("@/components/assets/LeftBottom"), { ssr: false });
-const MerryChris = dynamic(() => import("@/components/assets/MerryChris"), { ssr: false });
-const RightBottom = dynamic(() => import("@/components/assets/RightBottom"), { ssr: false });
-const Top = dynamic(() => import("@/components/assets/Top"), { ssr: false });
-const Twitter = dynamic(() => import("@/components/assets/Twitter"), { ssr: false });
-const ProfileDetails = dynamic(() => import("./ProfileDetails"), { ssr: false });
+import { useEffect, useRef, useState } from "react";
+import ProfileDetails from "./ProfileDetails";
+import { fetchGitHubUser } from "../../api/fetchGitHubUser";
 
 const Hero = () => {
   const [isClient, setIsClient] = useState(false);
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+  if (!isClient) {
+    return <Loader/>;
+  }
   const [userName, setUserName] = useState("");
   const [showProfile, setShowProfile] = useState(false);
-  const [profileData, setProfileData] = useState({
+  const [profileData, setProfileData] = useState<{
+    name: string;
+    src: string;
+    bio: string;
+    totalStars: number;
+    totalRepos: number;
+    longestStreak: number;
+    prsMerged: number;
+    totalCommits: number;
+  }>({
     name: "",
     src: "",
     bio: "",
@@ -33,44 +47,40 @@ const Hero = () => {
   const [loading, setLoading] = useState(false);
   const profileRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-
   const handleSubmit = async (event: React.FormEvent) => {
-    event.preventDefault();
-    setError(null);
-    setLoading(true);
+    // event.preventDefault();
+    // setError(null);
+    // setLoading(true);
 
-    const result = await fetchGitHubUser(userName);
+    // const result = await fetchGitHubUser(userName);
 
-    if (result === null || result.error) {
-      setError(result?.error || "An unexpected error occurred.");
-      setShowProfile(false);
-      setLoading(false);
-      return;
-    }
+    // if (result === null || result.error) {
+    //   setError(result?.error || "An unexpected error occurred.");
+    //   setShowProfile(false);
+    //   setLoading(false);
+    //   return;
+    // }
 
-    const { userData, stats } = result;
+    // const { userData, stats } = result;
 
-    if (userData && stats) {
-      setProfileData({
-        name: userData?.name || "No name available",
-        src: userData?.avatar_url || "",
-        bio: userData?.bio || "No bio available",
-        totalStars: stats.totalStars || 0,
-        totalRepos: stats.totalRepos || 0,
-        longestStreak: stats.longestStreak || 0,
-        prsMerged: stats.totalMergedPRs || 0,
-        totalCommits: stats.totalCommits || 0,
-      });
+    // if (userData && stats) {
+    //   setProfileData({
+    //     name: userData?.name || "No name available",
+    //     src: userData?.avatar_url || "",
+    //     bio: userData?.bio || "No bio available",
+    //     totalStars: stats.totalStars || 0,
+    //     totalRepos: stats.totalRepos || 0,
+    //     longestStreak: stats.longestStreak || 0,
+    //     prsMerged: stats.totalMergedPRs || 0,
+    //     totalCommits: stats.totalCommits || 0,
+    //   });
 
-      setShowProfile(true);
-    } else {
-      setError("Failed to fetch valid user data.");
-      setShowProfile(false);
-    }
-    setLoading(false);
+    //   setShowProfile(true);
+    // } else {
+    //   setError("Failed to fetch valid user data.");
+    //   setShowProfile(false);
+    // }
+    // setLoading(false);
   };
 
   const handleDownload = async () => {
@@ -90,9 +100,6 @@ const Hero = () => {
       window.open(twitterUrl, "_blank");
     }
   };
-
-  if (!isClient) {
-    return <Loader />;
 
   return (
     <section className="z-10 h-full w-full overflow-hidden px-4 py-4 md:w-fit">
