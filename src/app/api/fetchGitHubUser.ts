@@ -104,9 +104,13 @@ export const fetchGitHubUser = async (username: string) => {
     // LONGEST STREAK
     const commitsByRepoArray = await fetchCommitDates(username);
     const allCommitDates = commitsByRepoArray.flatMap((repo: any) =>
-      Array.isArray(repo.commitDates) ? repo.commitDates.map((date: string) => new Date(date)) : []
+      Array.isArray(repo.commitDates)
+        ? repo.commitDates.map((date: string) => new Date(date))
+        : [],
     );
-    const sortedCommits = allCommitDates.sort((a, b) => a.getTime() - b.getTime());
+    const sortedCommits = allCommitDates.sort(
+      (a: any, b: any) => a.getTime() - b.getTime(),
+    );
     console.log(sortedCommits);
     let { longestStreak } = await longestStreakFn(sortedCommits);
 
