@@ -1,3 +1,5 @@
+const GITHUB_TOKEN = process.env.NEXT_PUBLIC_GITHUB_TOKEN as string;
+
 interface CommitData {
   commitDates: string[];
   repoName: string;
@@ -10,21 +12,28 @@ interface StreakResult {
   endDate?: Date;
 }
 
-export async function fetchCommitDates(username: string): Promise<CommitData[]> {
+export async function fetchCommitDates(
+  username: string,
+): Promise<CommitData[]> {
   try {
-    // First, fetch all repositories for the user
+    const headers = {
+      Authorization: `Bearer ${GITHUB_TOKEN}`,
+      Accept: "application/vnd.github.v3+json",
+    };
+
     const response = await fetch(
       `https://api.github.com/users/${username}/repos?per_page=100`,
+      { headers },
     );
     if (!response.ok) throw new Error("Failed to fetch repositories");
 
     const repos = await response.json();
 
-    // Create an array of promises for fetching commits from each repo
     const commitPromises = repos.map(async (repo: any) => {
       try {
         const commitsResponse = await fetch(
           `https://api.github.com/repos/${username}/${repo.name}/commits?per_page=100&author=${username}`,
+          { headers },
         );
 
         if (!commitsResponse.ok)
@@ -41,7 +50,6 @@ export async function fetchCommitDates(username: string): Promise<CommitData[]> 
       }
     });
 
-    // Use Promise.all to fetch all commits concurrently
     return await Promise.all(commitPromises);
   } catch (error) {
     console.error("Error fetching repositories:", error);
@@ -52,7 +60,6 @@ export async function fetchCommitDates(username: string): Promise<CommitData[]> 
 function longestStreakFn(dates: Date[]): StreakResult {
   if (!dates.length) return { longestStreak: 0, currentStreak: 0 };
 
-  // Sort dates in ascending order
   const sortedDates = [...dates].sort((a, b) => a.getTime() - b.getTime());
 
   let currentStreak = 1;
@@ -65,7 +72,6 @@ function longestStreakFn(dates: Date[]): StreakResult {
     const prevDate = new Date(sortedDates[i - 1] || "");
     const currentDate = new Date(sortedDates[i] || "");
 
-    // Reset date times to start of day for comparison
     prevDate.setHours(0, 0, 0, 0);
     currentDate.setHours(0, 0, 0, 0);
 
@@ -91,22 +97,4 @@ function longestStreakFn(dates: Date[]): StreakResult {
     startDate: longestStart,
     endDate: longestEnd,
   };
-}
-
-// Usage example
-async function calculateGitHubStreak(username: string): Promise<StreakResult> {
-  try {
-    const commitsByRepoArray = await fetchCommitDates(username);
-
-    // Flatten and convert all commit dates to Date objects
-    const allCommitDates = commitsByRepoArray.flatMap((repo) =>
-      repo.commitDates.map((date) => new Date(date)),
-    );
-
-    // Calculate streaks
-    return longestStreakFn(allCommitDates);
-  } catch (error) {
-    console.error("Error calculating streak:", error);
-    throw error;
-  }
 }
