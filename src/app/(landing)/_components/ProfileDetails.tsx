@@ -63,11 +63,11 @@ const ProfileDetails = ({
           <p className="max-w-xl text-balance text-base font-bold text-foreground sm:text-xl md:text-wrap">
             {name}
           </p>
-          <p className="max-w-xl text-balance text-sm text-muted-foreground md:text-wrap">
+          <p className="w-full max-w-sm md:max-w-xl text-sm text-muted-foreground">
             {bio}
           </p>
-          <div className="absolute -mt-[23%] flex size-full items-center justify-center gap-4 pb-5">
-            <div className="absolute left-2 flex flex-col space-y-6 md:left-[15%]">
+          <div className="absolute -mt-[25%] md:-mt-[23%] flex size-full items-center justify-center gap-4 pb-5">
+            <div className="absolute left-[23%] flex flex-col space-y-6 md:left-[15%]">
               {/* 1 */}
               <div className="flex -rotate-3 flex-col items-center justify-center">
                 <div className="flex items-center justify-center gap-1">
@@ -91,7 +91,7 @@ const ProfileDetails = ({
                 </p>
               </div>
             </div>
-            <div className="absolute right-2 flex flex-col space-y-6 md:right-[15%]">
+            <div className="absolute right-[23%] flex flex-col space-y-6 md:right-[15%]">
               {/* 3 */}
               <div className="flex rotate-3 flex-col items-center justify-center">
                 <div className="flex items-center justify-center gap-1">

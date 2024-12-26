@@ -6,7 +6,7 @@ const HomePage = () => {
   return (
     <main className="mx-auto flex w-screen flex-col items-center justify-start overflow-hidden bg-[#E4E4E4]">
       <Hero />
-      <div className="absolute -bottom-[41%] left-1/2 -z-0 -translate-x-1/2">
+      <div className="absolute w-full overflow-hidden -bottom-[41%] left-1/2 -z-0 -translate-x-1/2">
         <WholeBg />
       </div>
     </main>
