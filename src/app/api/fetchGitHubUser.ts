@@ -1,3 +1,4 @@
+import { fetchCommitDates } from "./fetchCommitDates";
 import { longestStreakFn } from "./longestStreakFn";
 import { searchPullRequests } from "./searchPullRequests";
 
@@ -101,7 +102,13 @@ export const fetchGitHubUser = async (username: string) => {
     const totalCommits = commitsData.total_count;
 
     // LONGEST STREAK
-    let longestStreak = await longestStreakFn(reposData);
+    const commitsByRepoArray = await fetchCommitDates(username);
+    const allCommitDates = commitsByRepoArray.flatMap((repo: any) =>
+      Array.isArray(repo.commitDates) ? repo.commitDates.map((date: string) => new Date(date)) : []
+    );
+    const sortedCommits = allCommitDates.sort((a, b) => a.getTime() - b.getTime());
+    console.log(sortedCommits);
+    let { longestStreak } = await longestStreakFn(sortedCommits);
 
     // PRs MERGED
     const totalMergedPRs = await searchPullRequests(username);
